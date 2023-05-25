@@ -1,6 +1,7 @@
 import express from "express";
 import employeesRoutes from "./routes/employees.routes.js";
 import indexRoutes from "./routes/index.routes.js";
+import "./config.js"
 
 const app = express()
 
@@ -16,6 +17,4 @@ app.use((req, res, next) => {
 })
 
 const port = process.env.PORT || 3000
-app.listen(port, () => {
-  console.log('Listen on port: ' + port);
-})
+app.listen(port, () => console.log('Listen on port: ' + port))
