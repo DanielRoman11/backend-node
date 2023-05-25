@@ -10,19 +10,19 @@ const getEmployees = async(req, res) => {
   
 }
 const getEmployee = async(req, res) => {
+  const { id } = req.params;
   try {
-    const { id } = req.params;
     const [ rows ] = await pool.query(`SELECT * FROM employee WHERE id = ?;`, [id])
   
-    rows.length > 0 ? res.status(200).json(rows[0]) : res.status(404).json({msg: "Employee not found"})
+    return rows.length > 0 ? res.status(200).json(rows[0]) : res.status(404).json({msg: "Employee not found"})
   } catch (error) {
     return res.status(500).json({msg: "Something went wrong 😿"})
   }
 }
 
 const createEmployee = async(req, res) => {
+  const { name, salary } = req.body
   try {
-    const { name, salary } = req.body
     const [ rows ] = await pool.query("INSERT INTO employee (name, salary) VALUES (?, ?)", [name, salary]);
 
     res.send({
@@ -44,8 +44,8 @@ const deleteEmployees = async(req, res) => {
 }
 
 const deleteEmployee = async(req, res) => {
+  const { id } = req.params
   try {
-    const { id } = req.params
     const [ result ] = await pool.query("DELETE FROM employee WHERE id = ?", [id])
     return result.affectedRows > 0 ? res.sendStatus(204) : res.status(404).json({msg: "Employee not found"})
   } catch (error) {
@@ -56,10 +56,14 @@ const deleteEmployee = async(req, res) => {
 const updateEmployee = async(req, res) => {
   const { id } = req.params
   const { name, salary } = req.body
-  const [ result ] = await pool.query("UPDATE employee SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?;", [name, salary, id])
-  const [ rows ] = await pool.query(`SELECT * FROM employee WHERE id = ?;`, [id])
+  try {
+    const [ result ] = await pool.query("UPDATE employee SET name = IFNULL(?, name), salary = IFNULL(?, salary) WHERE id = ?;", [name, salary, id])
+    const [ rows ] = await pool.query(`SELECT * FROM employee WHERE id = ?;`, [id])
 
-  return result.affectedRows > 0 ? res.status(200).json(rows[0]) : res.status(404).json({msg: "Employee not found"})
+    return result.affectedRows > 0 ? res.status(200).json(rows[0]) : res.status(404).json({msg: "Employee not found"})
+  } catch (error) {
+    return res.status(500).json({msg: "Something went wrong 😿"})
+  }
 }
 
 
