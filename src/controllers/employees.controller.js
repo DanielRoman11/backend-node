@@ -25,10 +25,6 @@ const createEmployee = async(req, res) => {
   try {
     const [ rows ] = await pool.query("INSERT INTO employee (name, salary) VALUES (?, ?)", [name, salary]);
 
-    res.send({
-      id: rows.insertId,
-      name,
-      salary});
   } catch (error) {
     return res.status(500).json({msg: "Something went wrong 😿"})
   }
