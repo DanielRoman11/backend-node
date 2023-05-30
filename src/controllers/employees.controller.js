@@ -22,9 +22,11 @@ const getEmployee = async(req, res) => {
 
 const createEmployee = async(req, res) => {
   const { name, salary } = req.body
+  console.log(name);
+  console.log(salary);
   try {
     const [ rows ] = await pool.query("INSERT INTO employee (name, salary) VALUES (?, ?)", [name, salary]);
-    res.json({msg: "Employee Created 🙆"});
+    res.status(200).json({msg: "Employee Created 🙆", name: name , salary: salary});
   } catch (error) {
     return res.status(500).json({msg: "Something went wrong 😿"})
   }
