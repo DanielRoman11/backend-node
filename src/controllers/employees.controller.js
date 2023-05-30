@@ -24,7 +24,7 @@ const createEmployee = async(req, res) => {
   const { name, salary } = req.body
   try {
     const [ rows ] = await pool.query("INSERT INTO employee (name, salary) VALUES (?, ?)", [name, salary]);
-
+    res.json({msg: "Employee Created 🙆"});
   } catch (error) {
     return res.status(500).json({msg: "Something went wrong 😿"})
   }
@@ -32,8 +32,8 @@ const createEmployee = async(req, res) => {
 
 const deleteEmployees = async(req, res) => {
   try {
-    await pool.query("TRUNCATE TABLE employee")
-    res.json({msg: "All employees deleted"})
+    await pool.query("TRUNCATE TABLE employee");
+    res.json({msg: "All employees deleted"});
   } catch (error) {
     return res.status(500).json({msg: "Something went wrong 😿"})
   }
