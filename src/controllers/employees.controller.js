@@ -65,7 +65,8 @@ const updateEmployee = async(req, res) => {
 }
 
 
-export {getEmployees, getEmployee,
+export {
+  getEmployees, getEmployee,
   deleteEmployees, deleteEmployee, 
   createEmployee,
   updateEmployee
