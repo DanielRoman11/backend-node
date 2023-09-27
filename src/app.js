@@ -7,7 +7,7 @@ import { pool } from "./db.js";
 
 const app = express();
 
-console.log(pool);
+// console.log(pool);
 
 app.use(express.urlencoded({extended: false}));
 
