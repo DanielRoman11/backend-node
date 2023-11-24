@@ -3,8 +3,11 @@ import employeesRoutes from "./routes/employees.routes.js";
 import cors from "cors"
 import indexRoutes from "./routes/index.routes.js";
 import "./config.js"
+import { pool } from "./db.js";
 
 const app = express();
+
+// console.log(pool);
 
 app.use(express.urlencoded({extended: false}));
 
