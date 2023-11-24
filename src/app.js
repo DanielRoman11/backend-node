@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(express.json());
 app.use(cors({
-  origin: ["https://danielroman11.github.io/Consuming-a-Basic-APIrestful"], 
+  origin: ["https://danielroman11.github.io/Consuming-a-Basic-APIrestful", "https://danielroman11.github.io/"], 
   optionsSuccessStatus: 200
 }));
 
