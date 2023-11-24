@@ -12,9 +12,15 @@ const app = express();
 app.use(express.urlencoded({extended: false}));
 
 app.use(express.json());
-app.use(cors({origin: ["https://danielroman11.github.io/Consuming-a-Basic-APIrestful/"] }));
+app.use(cors({
+  origin: ["https://danielroman11.github.io/Consuming-a-Basic-APIrestful"], 
+  methods: "GET,PUT,PATCH,POST,DELETE"
+}));
 
-app.use("/api", employeesRoutes);
+app.use("/api", cors({
+  origin: ["https://danielroman11.github.io/Consuming-a-Basic-APIrestful"], 
+  methods: "GET,PUT,PATCH,POST,DELETE"
+}), employeesRoutes);
 app.use(indexRoutes);
 
 app.use((req, res, next) => {
