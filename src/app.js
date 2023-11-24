@@ -17,10 +17,11 @@ app.use(cors({
   optionsSuccessStatus: 200
 }));
 
-app.use("/api", cors({
-  origin: ["https://danielroman11.github.io/Consuming-a-Basic-APIrestful"], 
-  methods: "GET,PUT,PATCH,POST,DELETE"
-}), employeesRoutes);
+app.use("/api", 
+(req, res, next) =>  {
+  res.header("Access-Control-Allow-Origin", "https://danielroman11.github.io/Consuming-a-Basic-APIrestful/");
+  next();
+}, employeesRoutes);
 app.use(indexRoutes);
 
 app.use((req, res, next) => {
