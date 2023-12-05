@@ -13,15 +13,10 @@ app.use(express.urlencoded({extended: false}));
 
 app.use(express.json());
 app.use(cors({
-  origin: ["https://danielroman11.github.io/Consuming-a-Basic-APIrestful", "https://danielroman11.github.io"], 
-  optionsSuccessStatus: 200
+  origin: '*'
 }));
 
-app.use("/api", 
-(req, res, next) =>  {
-  res.header("Access-Control-Allow-Origin", "https://danielroman11.github.io");
-  next();
-}, employeesRoutes);
+app.use("/api", employeesRoutes);
 app.use(indexRoutes);
 
 app.use((req, res, next) => {
